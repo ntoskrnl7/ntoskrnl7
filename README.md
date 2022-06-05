@@ -1,8 +1,8 @@
 #### &#x1f4c8; My GitHub Stats
 
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=ntoskrnl7&show_icons=true&line_height=33&count_private=true&theme=dark) ![GitHub stats](https://github-readme-stats.vercel.app/api/top-langs/?username=ntoskrnl7&&hide=cmake&langs_count=4&line_height=35&theme=dark)
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=ntoskrnl7&show_icons=true&line_height=33&count_private=true) ![GitHub stats](https://github-readme-stats.vercel.app/api/top-langs/?username=ntoskrnl7&&hide=cmake&langs_count=4&line_height=35)
 
-![GitHub stats](https://github-readme-streak-stats.herokuapp.com/?user=ntoskrnl7&theme=dark)
+![GitHub stats](https://github-readme-streak-stats.herokuapp.com/?user=ntoskrnl7)
 
 <!--
 **ntoskrnl7/ntoskrnl7** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
