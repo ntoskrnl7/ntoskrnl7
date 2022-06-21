@@ -4,6 +4,8 @@
 
 ![GitHub stats](https://github-readme-streak-stats.herokuapp.com/?user=ntoskrnl7)
 
+![](https://komarev.com/ghpvc/?username=ntoskrnl7&color=blue)
+
 <!--
 **ntoskrnl7/ntoskrnl7** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 Here are some ideas to get you started:
