@@ -23,8 +23,8 @@ Here are some ideas to get you started:
 # 👋 Hi, I'm ntoskrnl7
 
 <!-- English Version -->
-**Full-stack system engineer specializing in low-level runtimes, browser engine internals, and protocol architecture.**  
-From system runtimes to browser engines and communication protocols—  
+**Full-stack system engineer specializing in low-level runtimes, browser engine internals, protocol architecture, and Windows native development.**  
+From system runtimes to browser engines, communication protocols, and Windows native APIs—  
 not just a user, but an architect and implementer who contributes to the ecosystem at every level.
 
 ---
@@ -37,6 +37,13 @@ not just a user, but an architect and implementer who contributes to the ecosyst
 
 - **Modern C++ & Systems Software**  
   - Extensive use of modern C++ (14/17/20), multi-threading, networking, IPC, and high-reliability system design
+
+- **Windows Native API & Win32 Extensions**  
+  - Advanced Win32 API wrapping and extension ([win32-ex]) for powerful and convenient native Windows development
+  - Building utility layers and helpers for both C++ and hybrid (Electron/Node.js) environments
+
+- **C++ Template Utilities & STL Extensions**  
+  - Author of [ext]: a modern C++ extended template utility library, bridging gaps in the standard library with reusable, cross-platform components
 
 - **Architecture & Performance Optimization**  
   - Large-scale system/platform architecture, code portability, and performance tuning
@@ -56,6 +63,8 @@ not just a user, but an architect and implementer who contributes to the ecosyst
 ## 🚀 Featured Projects
 
 - [crtsys]: Standard C runtime replacement and low-level system library (**Runtime Architecture**)
+- [win32-ex]: Modern, extensible Win32 API toolkit for advanced Windows native development (**Win32 API Extension**)
+- [ext]: C++ Extended Template Library bridging the STL and production utilities (**C++ STL & Utilities Extension**)
 - [electron-cdp]: Bridge/integration between Electron and Chromium DevTools Protocol (**Browser Engine Communication**)
 - [electron-protocol-provider]: Custom protocol handler framework for Electron (**Custom Protocols**)
 - [typed-message-transport]: Type-safe and serializable universal message transport library (**Type-Safe Messaging**)
@@ -82,7 +91,7 @@ not just a user, but an architect and implementer who contributes to the ecosyst
 # 👋 안녕하세요, ntoskrnl7입니다
 
 **수직 통합형 하이엔드 개발자**  
-시스템 런타임부터 브라우저 엔진, 통신 프로토콜, 플랫폼 구조까지—  
+시스템 런타임부터 브라우저 엔진, 통신 프로토콜, Win32 API, 그리고 C++ 유틸리티까지—  
 단순 사용자가 아닌, 직접 설계·구현하며 생태계에 실질적으로 기여하는 개발자입니다.
 
 ---
@@ -95,6 +104,13 @@ not just a user, but an architect and implementer who contributes to the ecosyst
 
 - **모던 C++ 및 시스템 소프트웨어**  
   - C++14/17/20 등 최신 언어 기능, 멀티스레딩/네트워크/IPC 등 고신뢰 시스템 설계
+
+- **Windows 네이티브 API & Win32 확장**  
+  - 고급 Win32 API 래핑 및 확장([win32-ex])으로 더욱 강력하고 편리한 네이티브 Windows 개발
+  - C++ 및 하이브리드(Electron/Node.js 등) 환경 모두를 위한 유틸리티/헬퍼 계층 구축
+
+- **C++ 템플릿 유틸리티 & STL 확장**  
+  - [ext]: 표준 C++ STL의 한계를 보완하는 현대적 템플릿 기반 범용 유틸리티 라이브러리 설계 및 구현
 
 - **아키텍처 설계 및 성능 최적화**  
   - 대규모 시스템/플랫폼 구조 설계, 코드 이식성, 고성능 최적화 경험
@@ -115,6 +131,8 @@ not just a user, but an architect and implementer who contributes to the ecosyst
 ## 🚀 대표 프로젝트
 
 - [crtsys]: 표준 C 런타임 대체 및 저수준 시스템 라이브러리 (**런타임 아키텍처**)
+- [win32-ex]: 현대적이고 확장성 있는 Win32 API 툴킷 (**Win32 API 확장**)
+- [ext]: C++ 표준 라이브러리와 실전 유틸리티를 잇는 확장 템플릿 라이브러리 (**C++ STL & 유틸리티 확장**)
 - [electron-cdp]: Electron과 Chromium DevTools Protocol 간의 브라우저 엔진 통신 브릿지/통합 (**브라우저 엔진 통신**)
 - [electron-protocol-provider]: Electron용 커스텀 프로토콜 핸들러 프레임워크 (**커스텀 프로토콜**)
 - [typed-message-transport]: 타입 안전·직렬화 기반 범용 메시지 트랜스포트 라이브러리 (**타입 세이프 메시징**)
@@ -136,6 +154,8 @@ not just a user, but an architect and implementer who contributes to the ecosyst
 ---
 
 [crtsys]: https://github.com/ntoskrnl7/crtsys
+[win32-ex]: https://github.com/ntoskrnl7/win32-ex
+[ext]: https://github.com/ntoskrnl7/ext
 [electron-cdp]: https://github.com/ntoskrnl7/electron-cdp
 [electron-protocol-provider]: https://github.com/ntoskrnl7/electron-protocol-provider
 [typed-message-transport]: https://github.com/ntoskrnl7/typed-message-transport
