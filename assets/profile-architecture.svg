@@ -1,67 +1,71 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
-  <title id="title">ntoskrnl7 Electron and Chromium feature-port portfolio</title>
-  <desc id="desc">A portfolio banner showing implementation of missing Electron and Chromium runtime capabilities, including Linux VA-API HEVC, Widevine CDM, preload scopes, trusted input, text APIs, print handling, user-agent client hints, and reusable port bundles.</desc>
+  <title id="title">ntoskrnl7 systems and runtime portfolio</title>
+  <desc id="desc">A portfolio banner for ntoskrnl7 showing systems runtime work across Windows kernel drivers, Win32 native APIs, Chromium and Electron internals, TypeScript and Rust messaging, and reusable build tooling.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0b1120" />
-      <stop offset="0.48" stop-color="#111827" />
+      <stop offset="0.52" stop-color="#111827" />
       <stop offset="1" stop-color="#172033" />
     </linearGradient>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+    <linearGradient id="thread" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#38bdf8" />
-      <stop offset="0.42" stop-color="#22c55e" />
-      <stop offset="0.72" stop-color="#f59e0b" />
+      <stop offset="0.34" stop-color="#22c55e" />
+      <stop offset="0.66" stop-color="#f59e0b" />
       <stop offset="1" stop-color="#fb7185" />
     </linearGradient>
-    <filter id="shadow" x="-12%" y="-22%" width="124%" height="154%">
-      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.35" />
+    <filter id="shadow" x="-10%" y="-18%" width="120%" height="146%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000000" flood-opacity="0.32" />
     </filter>
   </defs>
 
   <rect width="1200" height="420" rx="28" fill="url(#bg)" />
-  <path d="M54 318 C214 262, 306 356, 470 302 C638 247, 705 104, 900 136 C1030 157, 1083 84, 1148 58" fill="none" stroke="url(#accent)" stroke-width="3" opacity="0.58" />
-  <path d="M58 335 C242 284, 356 340, 530 317 C711 294, 814 204, 1140 172" fill="none" stroke="#64748b" stroke-width="1.2" opacity="0.34" />
+  <path d="M54 306 C170 245, 290 332, 420 276 C548 220, 615 109, 754 142 C902 177, 979 84, 1144 67" fill="none" stroke="url(#thread)" stroke-width="3" opacity="0.55" />
+  <path d="M60 336 C225 287, 347 326, 500 309 C690 288, 830 215, 1140 180" fill="none" stroke="#64748b" stroke-width="1.2" opacity="0.33" />
+  <path d="M96 94 H314 M96 126 H256 M970 70 H1104 M1016 101 H1146" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" opacity="0.62" />
 
   <text x="56" y="66" fill="#f8fafc" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="38" font-weight="700">ntoskrnl7</text>
-  <text x="56" y="105" fill="#dbeafe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="600">Implementing Electron and Chromium capabilities the stock runtime does not provide</text>
-  <text x="56" y="136" fill="#94a3b8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15">Reusable source ports for media pipelines, runtime APIs, browser identity, trusted input, text state, preload injection, DRM packaging, and release builds.</text>
+  <text x="56" y="105" fill="#dbeafe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="600">Systems, native runtimes, and application boundaries</text>
+  <text x="56" y="136" fill="#94a3b8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="15">Windows kernel and Win32 libraries, C++ runtime layers, Chromium/Electron internals, typed transports, and release tooling.</text>
 
   <g filter="url(#shadow)">
-    <rect x="56" y="178" width="236" height="120" rx="18" fill="#0f766e" opacity="0.96" />
-    <text x="78" y="213" fill="#ecfeff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Chromium Media</text>
-    <text x="78" y="239" fill="#ccfbf1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">Linux VA-API HEVC/H.265</text>
-    <text x="78" y="261" fill="#a7f3d0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">NVIDIA import, Main10, 4:4:4</text>
-    <text x="78" y="282" fill="#a7f3d0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">WebCodecs and GPU fallback control</text>
+    <rect x="56" y="178" width="248" height="120" rx="18" fill="#0f766e" opacity="0.96" />
+    <text x="78" y="213" fill="#ecfeff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Kernel Runtime</text>
+    <text x="78" y="239" fill="#ccfbf1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">crtsys / ldk</text>
+    <text x="78" y="261" fill="#a7f3d0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">C++ support inside WDK constraints</text>
+    <text x="78" y="282" fill="#a7f3d0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">drivers, IRQL, RPC, NTSTATUS</text>
 
-    <rect x="324" y="178" width="236" height="120" rx="18" fill="#1d4ed8" opacity="0.96" />
-    <text x="346" y="213" fill="#eff6ff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Electron Runtime APIs</text>
-    <text x="346" y="239" fill="#dbeafe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">preload, input, text, print</text>
-    <text x="346" y="261" fill="#bfdbfe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">workers, service workers, frames</text>
-    <text x="346" y="282" fill="#bfdbfe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">trusted dispatch and caret state</text>
+    <rect x="332" y="178" width="248" height="120" rx="18" fill="#1d4ed8" opacity="0.96" />
+    <text x="354" y="213" fill="#eff6ff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Native Windows</text>
+    <text x="354" y="239" fill="#dbeafe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">win32-ex / ext</text>
+    <text x="354" y="261" fill="#bfdbfe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">services, tokens, sessions, handles</text>
+    <text x="354" y="282" fill="#bfdbfe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">portable utilities and process tools</text>
 
-    <rect x="592" y="178" width="236" height="120" rx="18" fill="#7c3aed" opacity="0.96" />
-    <text x="614" y="213" fill="#faf5ff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Browser Identity / CDM</text>
-    <text x="614" y="239" fill="#ede9fe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">UA Client Hints and Widevine</text>
-    <text x="614" y="261" fill="#ddd6fe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">version-aware CDM packaging</text>
-    <text x="614" y="282" fill="#ddd6fe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">app/session/WebContents scope</text>
+    <rect x="608" y="178" width="248" height="120" rx="18" fill="#7c3aed" opacity="0.96" />
+    <text x="630" y="213" fill="#faf5ff" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Browser Runtime</text>
+    <text x="630" y="239" fill="#ede9fe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">Chromium / Electron</text>
+    <text x="630" y="261" fill="#ddd6fe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">CDP, protocols, source feature ports</text>
+    <text x="630" y="282" fill="#ddd6fe" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">media, workers, input, identity</text>
 
-    <rect x="860" y="178" width="284" height="120" rx="18" fill="#b45309" opacity="0.96" />
-    <text x="882" y="213" fill="#fff7ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Reusable Port Bundles</text>
-    <text x="882" y="239" fill="#ffedd5" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">Electron 41 / 42 / main</text>
-    <text x="882" y="261" fill="#fed7aa" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">Chromium patch-stack registration</text>
-    <text x="882" y="282" fill="#fed7aa" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">upgrade, apply, package, release</text>
+    <rect x="884" y="178" width="260" height="120" rx="18" fill="#b45309" opacity="0.96" />
+    <text x="906" y="213" fill="#fff7ed" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="19" font-weight="700">Typed Transports</text>
+    <text x="906" y="239" fill="#ffedd5" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="14">TypeScript / Rust</text>
+    <text x="906" y="261" fill="#fed7aa" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">workers, processes, WebSocket flows</text>
+    <text x="906" y="282" fill="#fed7aa" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="12">request/reply contracts and bridges</text>
   </g>
 
   <g fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600">
     <rect x="58" y="336" width="1084" height="42" rx="21" fill="#0f172a" opacity="0.74" />
-    <text x="86" y="362">VA-API</text>
-    <text x="160" y="362">HEVC/H.265</text>
-    <text x="272" y="362">WebCodecs</text>
-    <text x="378" y="362">Widevine/CDM</text>
-    <text x="506" y="362">Preload Realms</text>
-    <text x="640" y="362">Trusted Input</text>
-    <text x="762" y="362">Editable Text</text>
-    <text x="884" y="362">Print/PiP/Dialog</text>
-    <text x="1028" y="362">UA-CH</text>
+    <text x="86" y="362">C/C++</text>
+    <text x="154" y="362">WDK</text>
+    <text x="212" y="362">Win32</text>
+    <text x="284" y="362">CMake</text>
+    <text x="366" y="362">Chromium</text>
+    <text x="468" y="362">Electron</text>
+    <text x="556" y="362">VA-API / HEVC</text>
+    <text x="690" y="362">CDP</text>
+    <text x="744" y="362">TypeScript</text>
+    <text x="852" y="362">Node.js</text>
+    <text x="940" y="362">Rust</text>
+    <text x="1002" y="362">Protocols</text>
   </g>
 </svg>
