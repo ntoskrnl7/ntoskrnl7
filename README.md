@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/profile-architecture.svg" alt="ntoskrnl7 portfolio architecture map" />
+  <img src="assets/profile-architecture.svg" alt="ntoskrnl7 Electron and Chromium feature-port portfolio" />
 </p>
 
 # Jung-Kwang Lee / ntoskrnl7
 
 I build software at the boundary between low-level systems and application runtimes: Windows kernel drivers, C/C++ runtime layers, Win32 APIs, Chromium/Electron internals, media pipelines, and typed messaging for TypeScript and Rust applications.
 
-The common thread across my projects is not one framework. It is making difficult boundaries explicit: kernel/user mode, native/browser, main/renderer, worker/process, protocol/runtime, old compiler/new language feature, and unsupported upstream behavior/product requirements.
+The common thread across my projects is not one framework. It is making difficult boundaries explicit: kernel/user mode, native/browser, main/renderer, worker/process, protocol/runtime, old compiler/new language feature, and capabilities missing from stock Electron or Chromium.
 
 <p>
   <a href="https://github.com/ntoskrnl7/crtsys"><img alt="crtsys stars" src="https://img.shields.io/github/stars/ntoskrnl7/crtsys?style=flat-square&label=crtsys" /></a>
@@ -24,12 +24,34 @@ The common thread across my projects is not one framework. It is making difficul
 | Kernel runtime | Bringing C/C++ runtime and STL-like development patterns into Windows driver environments | [crtsys], [ldk] |
 | Native Windows | Service, process, session, token, privilege, SID, security descriptor, and Win32 helper layers | [win32-ex] |
 | C++ utility layer | Small reusable components for process control, result types, URI parsing, units, string handling, versioning, callbacks, and portability | [ext], [util-linux-cpp], [ci-version] |
-| Chromium media / Electron ports | Linux VA-API HEVC/H.265 work, Widevine/CDM integration, Electron source patch stacks, and feature ports that expose unavailable runtime capabilities | [electron-port-workspace] |
+| Chromium media / Electron ports | Implementing and carrying Electron/Chromium capabilities that the stock runtime does not provide | [electron-port-workspace] |
 | Electron runtime APIs | CDP automation, execution-context tracking, worker/frame integration, custom protocol routing, and browser identity control | [electron-cdp], [electron-protocol-provider] |
 | Typed messaging | Type-safe request/response contracts across MessagePort, workers, Node.js processes, WebSocket-style transports, and application boundaries | [typed-message-transport], [wsmq-rs], [service-rs] |
 | Small tools and bridges | Tiny type utilities, native bridge experiments, build/release helpers | [ts-default], [isim-rs] |
 
 ## Selected Work
+
+### electron-port-workspace and Chromium/Electron Feature Ports
+
+[electron-port-workspace] exists to implement, package, and repeatedly apply capabilities that stock Electron or Chromium do not provide in the shape required by real desktop products. The repository stores those changes as portable feature bundles, so the same work can be carried across Electron major versions, upstream `main`, and disposable test branches without losing the source history or patch order.
+
+The project is not only a patch manager. It is a feature-port workspace for turning missing runtime behavior into maintainable Electron/Chromium source changes.
+
+| Port | What it implements | Why it is different from stock Electron/Chromium |
+| --- | --- | --- |
+| `vaapi-hevc-wip` | Linux Chromium/Electron VA-API HEVC/H.265 work: NVIDIA native pixmap/modifier import fixes, WebCodecs fallback handling, HEVC Main/Main10/4:4:4 encode support, HEVC output-level plumbing, bitstream builder/parser extensions, stream reset fixes, and Intel iHD-specific stabilization. | Stock Linux Chromium/Electron media paths can fail to expose reliable HEVC hardware encode/decode behavior or fall back to software too easily. This keeps the GPU media path usable for product builds where H.265 support matters. |
+| `widevine-cdm` | Widevine/CDM integration for Electron builds: Chromium CDM renderer visibility, `enable_widevine` defaults, version-aware CDM resolving, manifest validation, host-version checks, and license-acknowledged package assembly. | Stock Electron builds do not give a complete product packaging flow for compatible CDM files. The resolver ties CDM selection to the target Chromium version instead of blindly copying a local Chrome install. |
+| `preload` | `session.registerPreloadScript` support for frames, subframes, dedicated workers, shared workers, and service workers, including initial empty-frame timing and PDF renderer fixes. | Stock preload control is not enough when an app needs deterministic policy/script injection across every JavaScript execution target. This separates script injection from Node integration and covers worker contexts explicitly. |
+| `dispatch-input-event` | Trusted Chromium-backed `webContents.dispatchInputEvent()` for keyboard, mouse, wheel, touch, text insertion, and IME composition, with input ACK visibility and IME highlight control. | Synthetic DOM events are not trusted and cannot replace real Chromium input dispatch. This gives apps remote-browser-input style forwarding through Chromium's input pipeline. |
+| `text-caret-info` | Main-process caret, selection, composition, frame, URL, and input metadata events/snapshots from `WebContents`. | Stock Electron does not expose enough editable caret state to build reliable accessibility, remote input, or text-assist features from the main process. |
+| `focused-editable-text` | Read, watch, and edit the focused editable element through Chromium's text input path, including selection and composition-aware operations. | DOM scraping or injected JS is fragile across frames, contenteditable, IME, and app-owned editors. This uses the browser text-input pipeline and coalesced watchers instead. |
+| `print-request-handler` | `webContents.setPrintRequestHandler()` for renderer `window.print()` and PDF viewer print requests, with app-controlled print/PDF jobs. | A naive cancellable print event can deadlock the initiating renderer. This design lets the app handle the request without blocking the frame on renderer-dependent work. |
+| `user-agent-override` | Coherent User-Agent and UA Client Hints override APIs at app, session, WebContents, and navigation scope, including workers and service workers. | Legacy `setUserAgent()` only changes part of browser identity. This keeps `User-Agent`, `Sec-CH-UA*`, and early `navigator.userAgentData` behavior aligned before navigation. |
+| `javascript-dialog-handler` | Async-safe `alert`, `confirm`, `prompt`, and `beforeunload` handling with type-specific dialog methods. | Stock Electron has built-in dialog behavior but limited structured interception. This gives apps a stable main-process control point while preserving default behavior when unused. |
+| `window-prompt-dialog` | Enables `window.prompt()` through Electron's JavaScript dialog path. | Stock Electron historically rejects `prompt()` as unsupported. This restores compatibility for pages that still depend on it. |
+| `picture-in-picture-handle-api` | Main-process handle and events for active video/document Picture-in-Picture windows, backed by Chromium state for source id, bounds, close state, and video size. | Stock Electron does not surface the active PiP window as a usable main-process object. This lets the app observe and integrate PiP with its own UI/control model. |
+
+The workspace also focuses on performance and repeatability: keeping media paths on GPU when possible, preventing unnecessary software fallback, preserving Chromium/Electron patch-stack order, avoiding repeated full-source surgery during upgrades, and packaging Electron builds in a way that can be repeated on persistent self-hosted runners.
 
 ### crtsys
 
@@ -43,23 +65,6 @@ It focuses on:
 - CMake/CPM-based integration across Visual Studio and Windows Kit versions
 
 This is the project that best represents my systems-runtime work: not only wrapping APIs, but rebuilding enough of the surrounding environment so higher-level C++ code can exist in a restricted runtime.
-
-### electron-port-workspace and Chromium/Electron Feature Ports
-
-[electron-port-workspace] is where I keep reusable Electron and Chromium feature work as portable patch bundles. The point is not just managing patches. It is a way to carry real product capabilities across Electron major versions, upstream `main`, and temporary test branches without losing reproducibility.
-
-Some of the ports are for features that are not available in stock Electron or Chromium builds:
-
-- Linux Chromium/Electron VA-API HEVC/H.265 work, including NVIDIA VA-API native pixmap/modifier import fixes, WebCodecs fallback handling, HEVC Main/Main10/4:4:4 encode support, HEVC output-level plumbing, bitstream builder/parser extensions, stream reset fixes, and Intel iHD-specific stabilization
-- Widevine/CDM integration for Electron builds, including Chromium CDM renderer visibility, build defaults, version-aware CDM resolving, manifest validation, host-version checks, and license-acknowledged package assembly
-- `session.registerPreloadScript` extensions for frames, subframes, dedicated workers, shared workers, and service workers, including early empty-frame timing fixes and PDF renderer edge cases
-- trusted `webContents.dispatchInputEvent()` forwarding for keyboard, mouse, wheel, touch, text insertion, and IME composition with Chromium input ACK visibility
-- focused editable text and caret APIs for reading, watching, and editing focused text through Chromium's real text input path
-- print request interception for renderer-initiated `window.print()` and PDF viewer print requests without deadlocking the initiating frame
-- coherent User-Agent + UA Client Hints overrides at app, session, and WebContents scope, including shared worker and service worker coverage
-- JavaScript dialog handling, `window.prompt()` support, and active Picture-in-Picture main-process handles
-
-There is also performance-sensitive work in this repository: keeping GPU media paths from falling back unnecessarily, preserving Chromium/Electron patch-stack order, avoiding repeated full-source surgery during upgrades, and packaging Electron builds in a way that can be repeated on persistent self-hosted runners.
 
 ### win32-ex
 
@@ -96,7 +101,7 @@ One thing I like about this project is that it keeps a wide compatibility target
 | Theme | How it shows up |
 | --- | --- |
 | Runtime parity | Make restricted environments such as Windows kernel drivers feel less isolated from normal C/C++ development. |
-| Unsupported capability work | Patch Chromium/Electron when product needs require behavior not exposed by the stock runtime. |
+| Missing capability implementation | Implement and maintain Electron/Chromium behavior that product runtimes need but upstream does not expose directly. |
 | Media pipeline ownership | Work through VA-API, WebCodecs, HEVC bitstreams, CDM packaging, and GPU/software fallback boundaries instead of treating media as a black box. |
 | Explicit boundaries | Prefer typed contracts, clear ownership, and transport abstractions over ad-hoc object passing. |
 | Portability | Keep code movable across compilers, Electron versions, Windows SDK/WDK versions, Chromium targets, and runtime contexts. |
