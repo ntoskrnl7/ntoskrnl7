@@ -9,12 +9,12 @@ I build software at the boundary between low-level systems and application runti
 The common thread across my projects is not one framework. It is making difficult boundaries explicit: kernel/user mode, native/browser, main/renderer, worker/process, protocol/runtime, old compiler/new language feature, and capabilities missing from stock Electron or Chromium.
 
 <p>
-  <a href="https://github.com/ntoskrnl7/crtsys"><img alt="crtsys: kernel runtime" src="https://img.shields.io/badge/crtsys-kernel%20runtime-0f766e?style=flat-square" /></a>
-  <a href="https://github.com/ntoskrnl7/win32-ex"><img alt="win32-ex: native Windows" src="https://img.shields.io/badge/win32--ex-native%20Windows-1d4ed8?style=flat-square" /></a>
-  <a href="https://github.com/ntoskrnl7/ext"><img alt="ext: C++ utilities" src="https://img.shields.io/badge/ext-C%2B%2B%20utilities-334155?style=flat-square" /></a>
-  <a href="https://github.com/ntoskrnl7/electron-port-workspace"><img alt="electron-port-workspace: Chromium and Electron feature ports" src="https://img.shields.io/badge/electron--port--workspace-feature%20ports-7c3aed?style=flat-square" /></a>
-  <a href="https://github.com/ntoskrnl7/electron-cdp"><img alt="electron-cdp: CDP runtime" src="https://img.shields.io/badge/electron--cdp-CDP%20runtime-4285f4?style=flat-square" /></a>
-  <a href="https://github.com/ntoskrnl7/typed-message-transport"><img alt="typed-message-transport: typed messages" src="https://img.shields.io/badge/typed--message--transport-typed%20messages-b45309?style=flat-square" /></a>
+  <a href="https://github.com/ntoskrnl7/crtsys"><img alt="crtsys stars" src="https://img.shields.io/github/stars/ntoskrnl7/crtsys?style=flat-square&label=crtsys" /></a>
+  <a href="https://github.com/ntoskrnl7/win32-ex"><img alt="win32-ex stars" src="https://img.shields.io/github/stars/ntoskrnl7/win32-ex?style=flat-square&label=win32-ex" /></a>
+  <a href="https://github.com/ntoskrnl7/ext"><img alt="ext stars" src="https://img.shields.io/github/stars/ntoskrnl7/ext?style=flat-square&label=ext" /></a>
+  <a href="https://github.com/ntoskrnl7/electron-port-workspace"><img alt="electron-port-workspace stars" src="https://img.shields.io/github/stars/ntoskrnl7/electron-port-workspace?style=flat-square&label=electron-port-workspace" /></a>
+  <a href="https://www.npmjs.com/package/electron-cdp-utils"><img alt="electron-cdp-utils npm" src="https://img.shields.io/npm/v/electron-cdp-utils?style=flat-square&label=electron-cdp-utils" /></a>
+  <a href="https://www.npmjs.com/package/typed-message-transport"><img alt="typed-message-transport npm" src="https://img.shields.io/npm/v/typed-message-transport?style=flat-square&label=typed-message-transport" /></a>
 </p>
 
 ## Portfolio Map
