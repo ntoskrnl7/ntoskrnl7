@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/profile-architecture.svg" alt="ntoskrnl7 Electron and Chromium feature-port portfolio" />
+  <img src="assets/profile-architecture.svg" alt="ntoskrnl7 systems and runtime portfolio" />
 </p>
 
 # Jung-Kwang Lee / ntoskrnl7
