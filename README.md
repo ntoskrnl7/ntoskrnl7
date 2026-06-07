@@ -4,9 +4,9 @@
 
 # Jung-Kwang Lee / ntoskrnl7
 
-I build software at the boundary between low-level systems and application runtimes: Windows kernel drivers, C/C++ runtime layers, Win32 APIs, Chromium/Electron internals, media pipelines, and typed messaging for TypeScript and Rust applications.
+I build runtime software where ordinary application code meets constrained systems: Windows kernel drivers, native Win32 APIs, Chromium/Electron internals, media pipelines, and typed transports for TypeScript and Rust.
 
-The common thread across my projects is not one framework. It is making difficult boundaries explicit: kernel/user mode, native/browser, main/renderer, worker/process, protocol/runtime, old compiler/new language feature, and capabilities missing from stock Electron or Chromium.
+Most of my work is about making hard boundaries usable: kernel/user mode, native/browser, main/renderer, worker/process, protocol/runtime, and missing behavior in stock runtimes.
 
 <p>
   <a href="https://github.com/ntoskrnl7/crtsys"><img alt="crtsys stars" src="https://img.shields.io/github/stars/ntoskrnl7/crtsys?style=flat-square&label=crtsys&cacheSeconds=3600" /></a>
@@ -17,95 +17,36 @@ The common thread across my projects is not one framework. It is making difficul
   <a href="https://www.npmjs.com/package/typed-message-transport"><img alt="typed-message-transport npm" src="https://img.shields.io/npm/v/typed-message-transport?style=flat-square&label=typed-message-transport&cacheSeconds=3600" /></a>
 </p>
 
-## Portfolio Map
+## What I Build
 
-| Layer | What I usually work on | Representative projects |
+| Area | Signal |
+| --- | --- |
+| Systems runtime | C/C++ runtime support inside Windows kernel-driver constraints. |
+| Native Windows | Practical wrappers around services, processes, sessions, tokens, handles, and security APIs. |
+| Browser runtime | Chromium/Electron source changes for product features that stock builds do not expose cleanly. |
+| Typed boundaries | Request/reply contracts across workers, MessagePort, Node.js processes, and WebSocket-style transports. |
+| Portability | Libraries and build scripts that survive old MSVC, MinGW, Linux, macOS, Electron majors, and Chromium upgrades. |
+
+## Highlighted Projects
+
+| Project | Core idea | Why it matters |
 | --- | --- | --- |
-| Kernel runtime | Bringing C/C++ runtime and STL-like development patterns into Windows driver environments | [crtsys], [ldk] |
-| Native Windows | Service, process, session, token, privilege, SID, security descriptor, and Win32 helper layers | [win32-ex] |
-| C++ utility layer | Small reusable components for process control, result types, URI parsing, units, string handling, versioning, callbacks, and portability | [ext], [util-linux-cpp], [ci-version] |
-| Chromium media / Electron ports | Implementing and carrying Electron/Chromium capabilities that the stock runtime does not provide | [electron-port-workspace] |
-| Electron runtime APIs | CDP automation, execution-context tracking, worker/frame integration, custom protocol routing, and browser identity control | [electron-cdp], [electron-protocol-provider] |
-| Typed messaging | Type-safe request/response contracts across MessagePort, workers, Node.js processes, WebSocket-style transports, and application boundaries | [typed-message-transport], [wsmq-rs], [service-rs] |
-| Small tools and bridges | Tiny type utilities, native bridge experiments, build/release helpers | [ts-default], [isim-rs] |
-
-## Selected Work
-
-### electron-port-workspace and Chromium/Electron Feature Ports
-
-[electron-port-workspace] exists to implement, package, and repeatedly apply capabilities that stock Electron or Chromium do not provide in the shape required by real desktop products. The repository stores those changes as portable feature bundles, so the same work can be carried across Electron major versions, upstream `main`, and disposable test branches without losing the source history or patch order.
-
-The project is not only a patch manager. It is a feature-port workspace for turning missing runtime behavior into maintainable Electron/Chromium source changes.
-
-| Port | What it implements | Why it is different from stock Electron/Chromium |
-| --- | --- | --- |
-| `vaapi-hevc-wip` | Linux Chromium/Electron VA-API HEVC/H.265 work: NVIDIA native pixmap/modifier import fixes, WebCodecs fallback handling, HEVC Main/Main10/4:4:4 encode support, HEVC output-level plumbing, bitstream builder/parser extensions, stream reset fixes, and Intel iHD-specific stabilization. | Stock Linux Chromium/Electron media paths can fail to expose reliable HEVC hardware encode/decode behavior or fall back to software too easily. This keeps the GPU media path usable for product builds where H.265 support matters. |
-| `widevine-cdm` | Widevine/CDM integration for Electron builds: Chromium CDM renderer visibility, `enable_widevine` defaults, version-aware CDM resolving, manifest validation, host-version checks, and license-acknowledged package assembly. | Stock Electron builds do not give a complete product packaging flow for compatible CDM files. The resolver ties CDM selection to the target Chromium version instead of blindly copying a local Chrome install. |
-| `preload` | `session.registerPreloadScript` support for frames, subframes, dedicated workers, shared workers, and service workers, including initial empty-frame timing and PDF renderer fixes. | Stock preload control is not enough when an app needs deterministic policy/script injection across every JavaScript execution target. This separates script injection from Node integration and covers worker contexts explicitly. |
-| `dispatch-input-event` | Trusted Chromium-backed `webContents.dispatchInputEvent()` for keyboard, mouse, wheel, touch, text insertion, and IME composition, with input ACK visibility and IME highlight control. | Synthetic DOM events are not trusted and cannot replace real Chromium input dispatch. This gives apps remote-browser-input style forwarding through Chromium's input pipeline. |
-| `text-caret-info` | Main-process caret, selection, composition, frame, URL, and input metadata events/snapshots from `WebContents`. | Stock Electron does not expose enough editable caret state to build reliable accessibility, remote input, or text-assist features from the main process. |
-| `focused-editable-text` | Read, watch, and edit the focused editable element through Chromium's text input path, including selection and composition-aware operations. | DOM scraping or injected JS is fragile across frames, contenteditable, IME, and app-owned editors. This uses the browser text-input pipeline and coalesced watchers instead. |
-| `print-request-handler` | `webContents.setPrintRequestHandler()` for renderer `window.print()` and PDF viewer print requests, with app-controlled print/PDF jobs. | A naive cancellable print event can deadlock the initiating renderer. This design lets the app handle the request without blocking the frame on renderer-dependent work. |
-| `user-agent-override` | Coherent User-Agent and UA Client Hints override APIs at app, session, WebContents, and navigation scope, including workers and service workers. | Legacy `setUserAgent()` only changes part of browser identity. This keeps `User-Agent`, `Sec-CH-UA*`, and early `navigator.userAgentData` behavior aligned before navigation. |
-| `javascript-dialog-handler` | Async-safe `alert`, `confirm`, `prompt`, and `beforeunload` handling with type-specific dialog methods. | Stock Electron has built-in dialog behavior but limited structured interception. This gives apps a stable main-process control point while preserving default behavior when unused. |
-| `window-prompt-dialog` | Enables `window.prompt()` through Electron's JavaScript dialog path. | Stock Electron historically rejects `prompt()` as unsupported. This restores compatibility for pages that still depend on it. |
-| `picture-in-picture-handle-api` | Main-process handle and events for active video/document Picture-in-Picture windows, backed by Chromium state for source id, bounds, close state, and video size. | Stock Electron does not surface the active PiP window as a usable main-process object. This lets the app observe and integrate PiP with its own UI/control model. |
-
-The workspace also focuses on performance and repeatability: keeping media paths on GPU when possible, preventing unnecessary software fallback, preserving Chromium/Electron patch-stack order, avoiding repeated full-source surgery during upgrades, and packaging Electron builds in a way that can be repeated on persistent self-hosted runners.
-
-### crtsys
-
-[crtsys] is a C/C++ runtime library for Windows kernel-driver development. The goal is to make driver code feel closer to normal C++ application development while staying inside the constraints of WDK, kernel stack size, IRQL rules, and driver lifecycle.
-
-It focuses on:
-
-- CRT and Microsoft STL support for kernel drivers without simply vendoring Microsoft CRT/STL sources into the project
-- C++ language/runtime features such as initialization, exceptions, threading primitives, futures, mutexes, condition variables, and iostream-style APIs
-- `ntl` helpers for driver entry, device objects, NTSTATUS handling, RPC-style user/kernel communication, IRQL helpers, spin locks, resources, and stack expansion
-- CMake/CPM-based integration across Visual Studio and Windows Kit versions
-
-This is the project that best represents my systems-runtime work: not only wrapping APIs, but rebuilding enough of the surrounding environment so higher-level C++ code can exist in a restricted runtime.
-
-### win32-ex
-
-[win32-ex] is a practical Win32 extension layer for native Windows development. It covers the everyday parts of Windows programming that become noisy when every call is written directly against the raw API: services, processes, sessions, handles, objects, tokens, privileges, security descriptors, and SIDs.
-
-The project intentionally supports old and new toolchains, including Visual Studio 2008 SP1+ and modern MSYS2/MinGW environments. That makes it useful as a portability layer, not just a modern C++ experiment.
-
-### ext
-
-[ext] is my general-purpose C++ utility library. It is a collection of components I tend to need when building real systems but do not want to pull a large framework for: `result`, `process`, pipes, callbacks, async results, version parsing, URI helpers, base64, INI parsing, shared memory, string utilities, units, type utilities, and compatibility helpers.
-
-One thing I like about this project is that it keeps a wide compatibility target: Linux, macOS, Windows, GCC, Clang, MSVC, old Visual Studio, and modern C++ where useful.
-
-### Electron Runtime Libraries
-
-[electron-cdp] publishes `electron-cdp-utils`, a TypeScript library for using the Chromium DevTools Protocol from Electron with a cleaner, typed API. It handles CDP sessions, command/event typing, function evaluation, SuperJSON-based serialization, execution-context tracking, iframe/worker/service-worker target attachment, and exposing Node.js functions into browser contexts.
-
-[electron-protocol-provider] is a custom protocol routing layer for Electron. It treats custom schemes more like application routes, with HTTP-style methods, path parameters, request handling, response objects, and privilege-aware context injection.
-
-### Typed Messaging and Runtime Boundaries
-
-[typed-message-transport] is a TypeScript message transport library for strongly typed message exchange across browser workers, Node.js processes, message channels, and other serializable transports. It supports typed request/response maps, handler registration, promise-based replies, serialization, and transport abstraction.
-
-[wsmq-rs] explores a Rust WebSocket messaging layer backed by protocol buffers, with request/reply flows, server/client configuration, context hooks, and bandwidth/progress handling. [service-rs] is a smaller Rust service lifecycle abstraction for pause, resume, stop, and running states.
-
-### Small Type and Native Bridge Utilities
-
-[ts-default] is a small TypeScript utility for representing an explicit "use the default value" marker. It is intentionally tiny, but it shows the kind of API boundary I like: a small type-level convention that removes ambiguity from optional configuration.
-
-[isim-rs] is a Rust/Node native-addon experiment using Neon. It belongs to the same family of work as the Electron and messaging projects: crossing runtime boundaries while keeping the JS-facing API explicit.
+| [crtsys] | C/C++ runtime library for Windows kernel drivers. | Brings CRT/STL-like development patterns, C++ runtime features, and driver helpers into a restricted WDK environment. |
+| [win32-ex] | Native Win32 extension layer. | Turns noisy service, process, session, token, privilege, SID, and security-descriptor code into reusable C++ APIs. |
+| [ext] | Portable C++ utility library. | Collects the small building blocks real systems keep needing: `result`, process control, pipes, callbacks, URI/version parsing, strings, units, and compatibility helpers. |
+| [electron-port-workspace] | Reusable Electron/Chromium feature-port workspace. | Carries source-level features such as Linux VA-API HEVC/H.265 work, Widevine packaging, preload coverage, trusted input dispatch, text state APIs, print/dialog handling, and browser identity fixes across Electron targets. |
+| [electron-cdp] | Typed DevTools Protocol helpers for Electron. | Makes CDP sessions, command/event typing, context tracking, iframe/worker attachment, evaluation, and serialization easier to use from TypeScript. |
+| [electron-protocol-provider] | Application-style routing for Electron custom protocols. | Treats custom schemes as structured routes with methods, path parameters, request objects, responses, and context injection. |
+| [typed-message-transport] | Type-safe message transport for JavaScript runtimes. | Keeps request/response contracts explicit across MessagePort, workers, Node.js processes, and other serializable transports. |
+| [wsmq-rs] / [service-rs] | Rust messaging and service lifecycle experiments. | Explores protocol-buffer-backed WebSocket flows, request/reply handling, progress hooks, and pause/resume/stop service states. |
+| [ts-default] / [isim-rs] | Small boundary-focused tools. | Covers tiny but useful API conventions such as explicit default values and Node/Rust native-addon experiments. |
 
 ## Engineering Themes
 
-| Theme | How it shows up |
-| --- | --- |
-| Runtime parity | Make restricted environments such as Windows kernel drivers feel less isolated from normal C/C++ development. |
-| Missing capability implementation | Implement and maintain Electron/Chromium behavior that product runtimes need but upstream does not expose directly. |
-| Media pipeline ownership | Work through VA-API, WebCodecs, HEVC bitstreams, CDM packaging, and GPU/software fallback boundaries instead of treating media as a black box. |
-| Explicit boundaries | Prefer typed contracts, clear ownership, and transport abstractions over ad-hoc object passing. |
-| Portability | Keep code movable across compilers, Electron versions, Windows SDK/WDK versions, Chromium targets, and runtime contexts. |
-| Source-level maintenance | Treat patches, build scripts, release packaging, and migration notes as part of the engineering surface. |
+- Make restricted runtimes feel less isolated from normal application development.
+- Prefer explicit contracts at process, protocol, worker, renderer, and native boundaries.
+- Treat patches, build scripts, packaging, and upgrade notes as part of the product surface.
+- Keep code portable across compilers, OS targets, SDK/WDK versions, Electron majors, and Chromium source trees.
 
 ## Toolbox
 
@@ -124,26 +65,11 @@ One thing I like about this project is that it keeps a wide compatibility target
   <img alt="Rust" src="https://img.shields.io/badge/Rust-runtime%20tools-000000?style=flat-square&logo=rust&logoColor=white" />
 </p>
 
-<details>
-<summary><strong>Repository guide</strong></summary>
-
-| Area | Repositories |
-| --- | --- |
-| Kernel / driver runtime | [crtsys], [ldk] |
-| Windows native API | [win32-ex] |
-| C++ libraries and build helpers | [ext], [util-linux-cpp], [ci-version], [i18next-cpp] |
-| Chromium/Electron ports and builds | [electron-port-workspace] |
-| Electron runtime libraries | [electron-cdp], [electron-protocol-provider] |
-| TypeScript libraries | [typed-message-transport], [ts-default] |
-| Rust messaging and native bridge experiments | [wsmq-rs], [service-rs], [isim-rs] |
-
-Some public forks in this account are research and contribution branches around Electron, Chromium, CEF, LLDB/GDB/MI debugging, Windows internals, and driver techniques. I keep the main profile focused on first-party libraries and feature-port work.
-
-</details>
+Also maintained: [ldk], [util-linux-cpp], [ci-version], and [i18next-cpp]. Some public forks are research and contribution branches around Electron, Chromium, CEF, LLDB/GDB/MI debugging, Windows internals, and driver techniques.
 
 ## Contact
 
-For project-specific questions, open an issue in the relevant repository. For collaboration, start from the project that is closest to the runtime boundary you care about.
+For project-specific questions, open an issue in the relevant repository. For collaboration, start from the project closest to the runtime boundary you care about.
 
 [crtsys]: https://github.com/ntoskrnl7/crtsys
 [ldk]: https://github.com/ntoskrnl7/ldk
