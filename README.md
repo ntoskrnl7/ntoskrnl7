@@ -9,12 +9,12 @@ I build runtime software where ordinary application code meets constrained syste
 Most of my work is about making hard boundaries usable: kernel/user mode, native/browser, main/renderer, worker/process, protocol/runtime, and missing behavior in stock runtimes.
 
 <p>
-  <a href="https://github.com/ntoskrnl7/crtsys"><img alt="crtsys stars" src="https://img.shields.io/github/stars/ntoskrnl7/crtsys?style=flat-square&label=crtsys&cacheSeconds=3600" /></a>
-  <a href="https://github.com/ntoskrnl7/win32-ex"><img alt="win32-ex stars" src="https://img.shields.io/github/stars/ntoskrnl7/win32-ex?style=flat-square&label=win32-ex&cacheSeconds=3600" /></a>
-  <a href="https://github.com/ntoskrnl7/ext"><img alt="ext stars" src="https://img.shields.io/github/stars/ntoskrnl7/ext?style=flat-square&label=ext&cacheSeconds=3600" /></a>
-  <a href="https://github.com/ntoskrnl7/electron-port-workspace"><img alt="electron-port-workspace stars" src="https://img.shields.io/github/stars/ntoskrnl7/electron-port-workspace?style=flat-square&label=electron-port-workspace&cacheSeconds=3600" /></a>
-  <a href="https://www.npmjs.com/package/electron-cdp-utils"><img alt="electron-cdp-utils npm" src="https://img.shields.io/npm/v/electron-cdp-utils?style=flat-square&label=electron-cdp-utils&cacheSeconds=3600" /></a>
-  <a href="https://www.npmjs.com/package/typed-message-transport"><img alt="typed-message-transport npm" src="https://img.shields.io/npm/v/typed-message-transport?style=flat-square&label=typed-message-transport&cacheSeconds=3600" /></a>
+  <a href="https://github.com/ntoskrnl7/crtsys"><img alt="crtsys stars" src="https://img.shields.io/endpoint?style=flat-square&cacheSeconds=3600&url=https%3A%2F%2Fraw.githubusercontent.com%2Fntoskrnl7%2Fntoskrnl7%2Fmain%2Fassets%2Fbadges%2Fcrtsys-stars.json" /></a>
+  <a href="https://github.com/ntoskrnl7/win32-ex"><img alt="win32-ex stars" src="https://img.shields.io/endpoint?style=flat-square&cacheSeconds=3600&url=https%3A%2F%2Fraw.githubusercontent.com%2Fntoskrnl7%2Fntoskrnl7%2Fmain%2Fassets%2Fbadges%2Fwin32-ex-stars.json" /></a>
+  <a href="https://github.com/ntoskrnl7/ext"><img alt="ext stars" src="https://img.shields.io/endpoint?style=flat-square&cacheSeconds=3600&url=https%3A%2F%2Fraw.githubusercontent.com%2Fntoskrnl7%2Fntoskrnl7%2Fmain%2Fassets%2Fbadges%2Fext-stars.json" /></a>
+  <a href="https://github.com/ntoskrnl7/electron-port-workspace"><img alt="electron-port-workspace stars" src="https://img.shields.io/endpoint?style=flat-square&cacheSeconds=3600&url=https%3A%2F%2Fraw.githubusercontent.com%2Fntoskrnl7%2Fntoskrnl7%2Fmain%2Fassets%2Fbadges%2Felectron-port-workspace-stars.json" /></a>
+  <a href="https://www.npmjs.com/package/electron-cdp-utils"><img alt="electron-cdp-utils npm" src="https://img.shields.io/endpoint?style=flat-square&cacheSeconds=3600&url=https%3A%2F%2Fraw.githubusercontent.com%2Fntoskrnl7%2Fntoskrnl7%2Fmain%2Fassets%2Fbadges%2Felectron-cdp-utils-npm.json" /></a>
+  <a href="https://www.npmjs.com/package/typed-message-transport"><img alt="typed-message-transport npm" src="https://img.shields.io/endpoint?style=flat-square&cacheSeconds=3600&url=https%3A%2F%2Fraw.githubusercontent.com%2Fntoskrnl7%2Fntoskrnl7%2Fmain%2Fassets%2Fbadges%2Ftyped-message-transport-npm.json" /></a>
 </p>
 
 ## What I Build

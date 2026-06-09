@@ -1,0 +1,90 @@
+name: Profile badges
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update-badges:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Update badge endpoint data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs/promises');
+          const path = require('path');
+
+          const githubBadges = [
+            { repo: 'crtsys', file: 'assets/badges/crtsys-stars.json', label: 'crtsys', color: '0f766e' },
+            { repo: 'win32-ex', file: 'assets/badges/win32-ex-stars.json', label: 'win32-ex', color: '1d4ed8' },
+            { repo: 'ext', file: 'assets/badges/ext-stars.json', label: 'ext', color: '334155' },
+            { repo: 'electron-port-workspace', file: 'assets/badges/electron-port-workspace-stars.json', label: 'electron-port-workspace', color: '7c3aed' }
+          ];
+
+          const npmBadges = [
+            { name: 'electron-cdp-utils', file: 'assets/badges/electron-cdp-utils-npm.json', label: 'electron-cdp-utils', color: '4285f4' },
+            { name: 'typed-message-transport', file: 'assets/badges/typed-message-transport-npm.json', label: 'typed-message-transport', color: 'b45309' }
+          ];
+
+          function makeBadge(label, message, color) {
+            return JSON.stringify({ schemaVersion: 1, label, message, color, cacheSeconds: 3600 }, null, 2) + '\n';
+          }
+
+          function starMessage(count) {
+            return Number(count).toLocaleString('en-US') + ' stars';
+          }
+
+          async function readJson(url, headers) {
+            const response = await fetch(url, { headers });
+            if (!response.ok) {
+              throw new Error(url + ': ' + response.status + ' ' + await response.text());
+            }
+            return response.json();
+          }
+
+          async function writeBadge(file, content) {
+            await fs.mkdir(path.dirname(file), { recursive: true });
+            await fs.writeFile(file, content, 'utf8');
+          }
+
+          const githubHeaders = {
+            Authorization: 'Bearer ' + process.env.GITHUB_TOKEN,
+            Accept: 'application/vnd.github+json',
+            'X-GitHub-Api-Version': '2022-11-28',
+            'User-Agent': 'ntoskrnl7-profile-badges'
+          };
+
+          for (const spec of githubBadges) {
+            const data = await readJson('https://api.github.com/repos/ntoskrnl7/' + spec.repo, githubHeaders);
+            await writeBadge(spec.file, makeBadge(spec.label, starMessage(data.stargazers_count), spec.color));
+          }
+
+          for (const spec of npmBadges) {
+            const data = await readJson('https://registry.npmjs.org/' + spec.name + '/latest', { 'User-Agent': 'ntoskrnl7-profile-badges' });
+            await writeBadge(spec.file, makeBadge(spec.label, 'v' + data.version, spec.color));
+          }
+          NODE
+
+      - name: Commit badge updates
+        run: |
+          git add assets/badges
+          if git diff --cached --quiet; then
+            echo "No badge updates."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update profile badges"
+            git push
+          fi
