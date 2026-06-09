@@ -57,9 +57,6 @@ Most of my work is about making hard boundaries usable: kernel/user mode, native
   <img alt="CMake" src="https://img.shields.io/badge/CMake-build%20systems-064F8C?style=flat-square&logo=cmake&logoColor=white" />
   <img alt="Electron" src="https://img.shields.io/badge/Electron-runtime-47848F?style=flat-square&logo=electron&logoColor=white" />
   <img alt="Chromium" src="https://img.shields.io/badge/Chromium-CDP%20%2F%20media-4285F4?style=flat-square&logo=googlechrome&logoColor=white" />
-  <img alt="VA-API" src="https://img.shields.io/badge/VA--API-Linux%20media-16a34a?style=flat-square" />
-  <img alt="HEVC" src="https://img.shields.io/badge/HEVC-H.265-9333ea?style=flat-square" />
-  <img alt="Widevine" src="https://img.shields.io/badge/Widevine-CDM-334155?style=flat-square" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-protocols-3178C6?style=flat-square&logo=typescript&logoColor=white" />
   <img alt="Node.js" src="https://img.shields.io/badge/Node.js-native%20bridges-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white" />
   <img alt="Rust" src="https://img.shields.io/badge/Rust-runtime%20tools-000000?style=flat-square&logo=rust&logoColor=white" />
