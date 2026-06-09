@@ -20,7 +20,7 @@ Most of my work is about making hard boundaries usable: kernel/user mode, native
 ## Core Work
 
 - CRT/STL support for practical C++ development inside Windows kernel drivers.
-- Chromium/Electron source ports for Linux VA-API HEVC/H.265, Widevine packaging, preload coverage, trusted input dispatch, text-state APIs, and browser identity control.
+- Chromium/Electron and Linux media source work for VA-API HEVC/H.265, NVENC-backed VA-API encode paths, Widevine packaging, preload coverage, trusted input dispatch, text-state APIs, and browser identity control.
 - Type-safe runtime bridges across Electron CDP, MessagePort, Web Workers, Node.js processes, and Rust services.
 
 ## Highlighted Projects
@@ -31,6 +31,7 @@ Most of my work is about making hard boundaries usable: kernel/user mode, native
 | [win32-ex] | Native Win32 extension layer. | Turns noisy service, process, session, token, privilege, SID, and security-descriptor code into reusable C++ APIs. |
 | [ext] | Portable C++ utility library. | Collects the small building blocks real systems keep needing: `result`, process control, pipes, callbacks, URI/version parsing, strings, units, and compatibility helpers. |
 | [electron-port-workspace] | Reusable Electron/Chromium feature-port workspace. | Carries source-level features such as Linux VA-API HEVC/H.265 work, Widevine packaging, preload coverage, trusted input dispatch, text state APIs, print/dialog handling, and browser identity fixes across Electron targets. |
+| [nvidia-vaapi-driver] (`nvenc`) | Experimental NVENC encode path for NVIDIA VA-API. | Adds capability-gated H.264/HEVC/AV1 `VAEntrypointEncSlice` exposure, rate-control mapping, direct CUDA/DMABUF import paths, NVENC 13 headers, and runtime encode/decode validation. |
 | [electron-cdp] | Typed DevTools Protocol helpers for Electron. | Makes CDP sessions, command/event typing, context tracking, iframe/worker attachment, evaluation, and serialization easier to use from TypeScript. |
 | [electron-protocol-provider] | Application-style routing for Electron custom protocols. | Treats custom schemes as structured routes with methods, path parameters, request objects, responses, and context injection. |
 | [typed-message-transport] | Type-safe message transport for JavaScript runtimes. | Keeps request/response contracts explicit across MessagePort, workers, Node.js processes, and other serializable transports. |
@@ -53,6 +54,9 @@ Most of my work is about making hard boundaries usable: kernel/user mode, native
   <img alt="CMake" src="https://img.shields.io/badge/CMake-build%20systems-064F8C?style=flat-square&logo=cmake&logoColor=white" />
   <img alt="Electron" src="https://img.shields.io/badge/Electron-runtime-47848F?style=flat-square&logo=electron&logoColor=white" />
   <img alt="Chromium" src="https://img.shields.io/badge/Chromium-CDP%20%2F%20media-4285F4?style=flat-square&logo=googlechrome&logoColor=white" />
+  <img alt="VA-API" src="https://img.shields.io/badge/VA--API-Linux%20media-16a34a?style=flat-square" />
+  <img alt="NVENC" src="https://img.shields.io/badge/NVENC-NVIDIA%20encode-76b900?style=flat-square&logo=nvidia&logoColor=white" />
+  <img alt="HEVC" src="https://img.shields.io/badge/HEVC-H.265-9333ea?style=flat-square" />
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-protocols-3178C6?style=flat-square&logo=typescript&logoColor=white" />
   <img alt="Node.js" src="https://img.shields.io/badge/Node.js-native%20bridges-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white" />
   <img alt="Rust" src="https://img.shields.io/badge/Rust-runtime%20tools-000000?style=flat-square&logo=rust&logoColor=white" />
@@ -73,6 +77,7 @@ For project-specific questions, open an issue in the relevant repository. For co
 [electron-cdp]: https://github.com/ntoskrnl7/electron-cdp
 [electron-protocol-provider]: https://github.com/ntoskrnl7/electron-protocol-provider
 [electron-port-workspace]: https://github.com/ntoskrnl7/electron-port-workspace
+[nvidia-vaapi-driver]: https://github.com/ntoskrnl7/nvidia-vaapi-driver/tree/nvenc
 [typed-message-transport]: https://github.com/ntoskrnl7/typed-message-transport
 [wsmq-rs]: https://github.com/ntoskrnl7/wsmq-rs
 [service-rs]: https://github.com/ntoskrnl7/service-rs
