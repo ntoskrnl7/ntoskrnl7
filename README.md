@@ -4,7 +4,7 @@
 
 # Jung-Kwang Lee / ntoskrnl7
 
-I build runtime software where ordinary application code meets constrained systems: Windows kernel drivers, native Win32 APIs, Chromium/Electron internals, media pipelines, and typed transports for TypeScript and Rust.
+I build runtime software where ordinary application code meets constrained systems: Windows kernel drivers, NT Native APIs, Win32 APIs, Chromium/Electron internals, media pipelines, and typed transports for TypeScript and Rust.
 
 Most of my work is about making hard boundaries usable: kernel/user mode, native/browser, main/renderer, worker/process, protocol/runtime, and missing behavior in stock runtimes.
 
