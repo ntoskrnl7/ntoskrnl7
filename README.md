@@ -58,7 +58,7 @@ Most of my work is about making hard boundaries usable: kernel/user mode, native
   <img alt="Rust" src="https://img.shields.io/badge/Rust-runtime%20tools-000000?style=flat-square&logo=rust&logoColor=white" />
 </p>
 
-Also maintained: [ldk], [util-linux-cpp], [ci-version], and [i18next-cpp]. Some public forks are research and contribution branches around Electron, Chromium, CEF, LLDB/GDB/MI debugging, Windows internals, and driver techniques.
+Also maintained: [ldk], [util-linux-cpp] and [ci-version]. Some public forks are research and contribution branches around Electron, Chromium, CEF, LLDB/GDB/MI debugging, Windows internals, and driver techniques.
 
 ## Contact
 
@@ -70,7 +70,6 @@ For project-specific questions, open an issue in the relevant repository. For co
 [ext]: https://github.com/ntoskrnl7/ext
 [util-linux-cpp]: https://github.com/ntoskrnl7/util-linux-cpp
 [ci-version]: https://github.com/ntoskrnl7/ci-version
-[i18next-cpp]: https://github.com/ntoskrnl7/i18next-cpp
 [electron-cdp]: https://github.com/ntoskrnl7/electron-cdp
 [electron-protocol-provider]: https://github.com/ntoskrnl7/electron-protocol-provider
 [electron-port-workspace]: https://github.com/ntoskrnl7/electron-port-workspace
