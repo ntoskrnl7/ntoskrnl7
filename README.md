@@ -17,15 +17,11 @@ Most of my work is about making hard boundaries usable: kernel/user mode, native
   <a href="https://www.npmjs.com/package/typed-message-transport"><img alt="typed-message-transport npm" src="https://img.shields.io/endpoint?style=flat-square&cacheSeconds=3600&url=https%3A%2F%2Fraw.githubusercontent.com%2Fntoskrnl7%2Fntoskrnl7%2Fmain%2Fassets%2Fbadges%2Ftyped-message-transport-npm.json" /></a>
 </p>
 
-## What I Build
+## Core Work
 
-| Area | Signal |
-| --- | --- |
-| Systems runtime | C/C++ runtime support inside Windows kernel-driver constraints. |
-| Native Windows | Practical wrappers around services, processes, sessions, tokens, handles, and security APIs. |
-| Browser runtime | Chromium/Electron source changes for product features that stock builds do not expose cleanly. |
-| Typed boundaries | Request/reply contracts across workers, MessagePort, Node.js processes, and WebSocket-style transports. |
-| Portability | Libraries and build scripts that survive old MSVC, MinGW, Linux, macOS, Electron majors, and Chromium upgrades. |
+- CRT/STL support for practical C++ development inside Windows kernel drivers.
+- Chromium/Electron source ports for Linux VA-API HEVC/H.265, Widevine packaging, preload coverage, trusted input dispatch, text-state APIs, and browser identity control.
+- Type-safe runtime bridges across Electron CDP, MessagePort, Web Workers, Node.js processes, and Rust services.
 
 ## Highlighted Projects
 
