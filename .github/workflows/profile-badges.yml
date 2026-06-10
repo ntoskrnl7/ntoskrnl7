@@ -59,22 +59,29 @@ jobs:
             await fs.writeFile(file, content, 'utf8');
           }
 
-          const githubHeaders = {
-            Authorization: 'Bearer ' + process.env.GITHUB_TOKEN,
-            Accept: 'application/vnd.github+json',
-            'X-GitHub-Api-Version': '2022-11-28',
-            'User-Agent': 'ntoskrnl7-profile-badges'
-          };
+          async function main() {
+            const githubHeaders = {
+              Authorization: 'Bearer ' + process.env.GITHUB_TOKEN,
+              Accept: 'application/vnd.github+json',
+              'X-GitHub-Api-Version': '2022-11-28',
+              'User-Agent': 'ntoskrnl7-profile-badges'
+            };
 
-          for (const spec of githubBadges) {
-            const data = await readJson('https://api.github.com/repos/ntoskrnl7/' + spec.repo, githubHeaders);
-            await writeBadge(spec.file, makeBadge(spec.label, starMessage(data.stargazers_count), spec.color));
+            for (const spec of githubBadges) {
+              const data = await readJson('https://api.github.com/repos/ntoskrnl7/' + spec.repo, githubHeaders);
+              await writeBadge(spec.file, makeBadge(spec.label, starMessage(data.stargazers_count), spec.color));
+            }
+
+            for (const spec of npmBadges) {
+              const data = await readJson('https://registry.npmjs.org/' + spec.name + '/latest', { 'User-Agent': 'ntoskrnl7-profile-badges' });
+              await writeBadge(spec.file, makeBadge(spec.label, 'v' + data.version, spec.color));
+            }
           }
 
-          for (const spec of npmBadges) {
-            const data = await readJson('https://registry.npmjs.org/' + spec.name + '/latest', { 'User-Agent': 'ntoskrnl7-profile-badges' });
-            await writeBadge(spec.file, makeBadge(spec.label, 'v' + data.version, spec.color));
-          }
+          main().catch(error => {
+            console.error(error);
+            process.exit(1);
+          });
           NODE
 
       - name: Commit badge updates
