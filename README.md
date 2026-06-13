@@ -20,7 +20,7 @@ Most of my work is about making hard boundaries usable: kernel/user mode, native
 ## Core Work
 
 - CRT/STL support for practical C++ development inside Windows kernel drivers.
-- Chromium/Electron and Linux media source work for VA-API HEVC/H.265, NVENC-backed VA-API encode paths, Widevine packaging, preload coverage, trusted input dispatch, text-state APIs, and browser identity control.
+- Chromium/Electron and Linux media source work for Chrome VA-API hotpatching, VA-API HEVC/H.265, NVENC-backed VA-API encode paths, Widevine packaging, preload coverage, trusted input dispatch, text-state APIs, and browser identity control.
 - Type-safe runtime bridges across Electron CDP, MessagePort, Web Workers, Node.js processes, and Rust services.
 
 ## Highlighted Projects
@@ -31,6 +31,7 @@ Most of my work is about making hard boundaries usable: kernel/user mode, native
 | [win32-ex] | Native Win32 extension layer. | Turns noisy service, process, session, token, privilege, SID, and security-descriptor code into reusable C++ APIs. |
 | [ext] | Portable C++ utility library. | Collects the small building blocks real systems keep needing: `result`, process control, pipes, callbacks, URI/version parsing, strings, units, and compatibility helpers. |
 | [electron-port-workspace] | Reusable Electron/Chromium feature-port workspace. | Carries source-level features such as Linux VA-API HEVC/H.265 work, Widevine packaging, preload coverage, trusted input dispatch, text state APIs, print/dialog handling, and browser identity fixes across Electron targets. |
+| [chrome-vaapi-hotpatch] | Linux Google Chrome VA-API hotpatch runtime. | Improves Chrome's incomplete Linux VA-API support for supported drivers, including Intel and NVIDIA, enabling WebCodecs H.264 VA-API encode and adding HEVC/H.265 encode paths missing from stock Linux Chrome without replacing the system browser. |
 | [nvidia-vaapi-driver] (`nvenc`) | Experimental NVENC encode path for NVIDIA VA-API. | Adds capability-gated H.264/HEVC/AV1 `VAEntrypointEncSlice` exposure, rate-control mapping, direct CUDA/DMABUF import paths, NVENC 13 headers, and runtime encode/decode validation. |
 | [electron-cdp] | Typed DevTools Protocol helpers for Electron. | Makes CDP sessions, command/event typing, context tracking, iframe/worker attachment, evaluation, and serialization easier to use from TypeScript. |
 | [electron-protocol-provider] | Application-style routing for Electron custom protocols. | Treats custom schemes as structured routes with methods, path parameters, request objects, responses, and context injection. |
@@ -77,6 +78,7 @@ For project-specific questions, open an issue in the relevant repository. For co
 [electron-cdp]: https://github.com/ntoskrnl7/electron-cdp
 [electron-protocol-provider]: https://github.com/ntoskrnl7/electron-protocol-provider
 [electron-port-workspace]: https://github.com/ntoskrnl7/electron-port-workspace
+[chrome-vaapi-hotpatch]: https://github.com/ntoskrnl7/chrome-vaapi-hotpatch
 [nvidia-vaapi-driver]: https://github.com/ntoskrnl7/nvidia-vaapi-driver/tree/nvenc
 [typed-message-transport]: https://github.com/ntoskrnl7/typed-message-transport
 [wsmq-rs]: https://github.com/ntoskrnl7/wsmq-rs
